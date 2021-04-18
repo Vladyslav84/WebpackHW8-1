@@ -1,23 +1,31 @@
 import './styles.css';
 import images from '../src/js/gallary';
+import Siema from 'siema';
 
-console.log(images);
-
+const gallery = document.querySelector('.siema');
 const galleryEl = document.querySelector('.js-gallery');
 const ModalWindow = document.querySelector('.js-lightbox');
-const ModalWindowClose = document.querySelector('.lightbox__button')
+const ModalWindowClose = document.querySelector('.lightbox__button');
 const lightboxImage = document.querySelector('.lightbox__image');
-const lightboxOverlayEl = document.querySelector('.lightbox__overlay')
+const lightboxOverlayEl = document.querySelector('.lightbox__overlay');
+const buttonPrev = document.querySelector('.prev');
+const buttonNext = document.querySelector('.next');
 
 galleryEl.addEventListener('click', onGalleryElClick);
 ModalWindowClose.addEventListener('click', onModalWindowCloseClick);
 lightboxOverlayEl.addEventListener('click', onOverlayClick);
+
+buttonNext.addEventListener('click', () => siema.next());
+buttonPrev.addEventListener('click', () => siema.prev());
+
 
 let currentInd = null;
 
 function createImgList(images) {
 
     return images.map(({ preview, original, description }) => {
+
+        // return `<img class="gallery__image" src="${ original }" data-source="${ original }" alt="${ description }">`;
 
         return ` <li class="gallery__item">
             <a class="gallery__link" 
@@ -114,3 +122,5 @@ function onEscPressClose(evt) {
         onModalWindowCloseClick();
     };
 };
+
+const siema = new Siema();
